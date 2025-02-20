@@ -82,6 +82,10 @@ export default function App() {
     setSelectedId(null);
   }
 
+  function handleAddWatched(movie) {
+    return setWatched((watched) => [...watched, movie]);
+  }
+
   useEffect(
     function () {
       async function fetchMovies() {
@@ -219,6 +223,7 @@ function Box({ children }) {
     </div>
   );
 }
+
 /* 
 function WatchedBox() {
   const [watched, setWatched] = useState(tempWatchedData);
@@ -241,7 +246,7 @@ function WatchedBox() {
     </div>
   );
 }
- */
+*/
 
 function MovieList({ movies, onSelectMovie }) {
   return (
