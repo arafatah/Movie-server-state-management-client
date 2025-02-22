@@ -113,8 +113,8 @@ export default function App() {
           // console.log(data.Search);
           // setIsLoading(false);
         } catch (err) {
-          console.error(err.message);
           if (err.name !== "AbortError") {
+            console.log(err.message);
             setError(err.message);
           }
         } finally {
@@ -126,7 +126,8 @@ export default function App() {
         setError("");
         return;
       }
-
+      
+      handleCloseMovie();
       fetchMovies();
 
       return function () {
@@ -342,7 +343,6 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
       function callback(e) {
         if (e.code === "ControlLeft" || e.code === "ControlRight") {
           onCloseMovie();
-          console.log("ESC pressed");
         }
       }
 
@@ -354,7 +354,7 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     },
     [onCloseMovie]
   );
-F
+
   useEffect(
     function () {
       async function getMovieDetails() {
