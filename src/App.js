@@ -16,7 +16,6 @@ export default function App() {
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
 
-
   function handleSelectMovie(id) {
     setSelectedId((selectedId) => (id === selectedId ? null : id));
   }
@@ -69,7 +68,7 @@ export default function App() {
         setError("");
         return;
       }
-      
+
       handleCloseMovie();
       fetchMovies();
 
@@ -265,6 +264,9 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     Director: director,
     Genre: genre,
   } = movie;
+
+  /*eslint-disable*/
+  // if (imdbRating > 8) [isTop, setIsTop] = useState(true);
 
   function handleAdd() {
     const newWatchedMovie = {
