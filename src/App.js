@@ -265,8 +265,20 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     Genre: genre,
   } = movie;
 
-  /*eslint-disable*/
+  // if (imdbRating > 8) return <p>Greatest ever</p>;
   // if (imdbRating > 8) [isTop, setIsTop] = useState(true);
+
+  /*const [isTop, setIsTop] = useEffect(imdbRating > 8);
+  console.log(isTop);
+  useEffect(
+    function () {
+      setIsTop(imdbRating > 8);
+    },
+    [imdbRating, setIsTop]
+  ); */
+
+  const isTop = imdbRating > 8;
+  console.log(isTop);
 
   function handleAdd() {
     const newWatchedMovie = {
