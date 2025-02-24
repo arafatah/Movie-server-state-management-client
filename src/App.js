@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import StarRating from "./StarRating";
 import { useMovies } from "./useMovies";
 import { useLocalStorageState } from "./useLocalStorageState";
+import { useKey } from "./useKey";
 
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0).toFixed(2);
@@ -125,14 +126,19 @@ function Search({ query, setQuery }) {
 
   // Usage of useRef
   const inputEl = useRef(null);
+  useKey("Enter", function () {
+    if (document.activeElement === inputEl.current) return;
+    inputEl.current.focus();
+    setQuery("");
+  });
 
-  useEffect(
+ /*  useEffect(
     function () {
       function callback(e) {
         // console.log(document.activeElement);
-        if (document.activeElement === inputEl.current) return;
 
         if (e.code === "Enter") {
+          if (document.activeElement === inputEl.current) return;
           inputEl.current.focus();
           setQuery("");
         }
@@ -142,7 +148,7 @@ function Search({ query, setQuery }) {
       return () => document.addEventListener("keydown", callback);
     },
     [setQuery]
-  );
+  ); */
 
   return (
     <input
@@ -299,22 +305,24 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     //   setAvgRating((avgRating) => (avgRating + userRating) / 2);
   }
 
-  useEffect(
-    function () {
-      function callback(e) {
-        if (e.code === "ControlLeft" || e.code === "ControlRight") {
-          onCloseMovie();
-        }
-      }
+  useKey("ControlLeft" || "ControlRight", onCloseMovie);
 
-      document.addEventListener("keydown", callback);
+  // useEffect(
+  //   function () {
+  //     function callback(e) {
+  //       if (e.code === "ControlLeft" || e.code === "ControlRight") {
+  //         onCloseMovie();
+  //       }
+  //     }
 
-      return function () {
-        document.removeEventListener("keydown", callback);
-      };
-    },
-    [onCloseMovie]
-  );
+  //     document.addEventListener("keydown", callback);
+
+  //     return function () {
+  //       document.removeEventListener("keydown", callback);
+  //     };
+  //   },
+  //   [onCloseMovie]
+  // );
 
   useEffect(
     function () {
