@@ -184,7 +184,7 @@ function Search({ query, setQuery }) {
   useEffect(
     function () {
       function callback(e) {
-        console.log(document.activeElement);
+        // console.log(document.activeElement);
         if (document.activeElement === inputEl.current) return;
 
         if (e.code === "Enter") {
@@ -295,7 +295,7 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
 
   useEffect(
     function () {
-      if (userRating) countRef.current = countRef.current + 1;
+      if (userRating) countRef.current++;
     },
     [userRating]
   );
